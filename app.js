@@ -36,5 +36,4 @@ var textOne = "Apples and Oranges";
 
 var textTwo = "Apples and Oranges";
 
-var differences = compare(textOne, textTwo);
-console.log(differences);
+console.log(compare(textOne, textTwo));
