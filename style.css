@@ -3,6 +3,16 @@ body {
   align-items: center;
 }
 
+#formText {
+  word-wrap: break-word;
+  word-break: break-word;
+  max-height: 100px;
+  background-color: lightgrey;
+  border: none;
+  outline: none;
+  overflow-y: scroll;
+}
+
 #mainElements {
   width: 480px;
 }
