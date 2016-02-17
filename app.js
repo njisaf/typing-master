@@ -38,6 +38,18 @@ var textTwo = "Apples and Oranges";
 
 console.log(compare(textOne, textTwo));
 
+var levelMod = 1.5;
+var characterCount = 1000;
+
+var distractions = {
+  distractionOne: setInterval(effectOne, 5000 * levelMod), 
+  distractionTwo: setInterval(effectOne, 12500 * levelMod),
+  distractionThree:
+  distractionFour:
+  dirsractionFive:
+  distractionSix:
+}
+
 function startTimer(duration, display) {
     var start = Date.now(),
         diff,
