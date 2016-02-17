@@ -235,3 +235,13 @@
   -webkit-animation-name: slideInUp;
   animation-name: slideInUp;
 }
+
+/*img src="http://www.w3schools.com/css/img_lights.jpg"*/ an idea of aurorea borealis for typing master background image
+<div class="img">
+  <a target="_blank" href="lights.jpg">
+    <img src="lights.jpg" alt="Northern Lights" width="300" height="200">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+/*in www.w3schools.com/css, may consider using CSS3 and border images and/or others*/
