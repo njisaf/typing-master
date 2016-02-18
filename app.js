@@ -17,64 +17,99 @@ var Game = {
 
   elTextBlock: document.getElementById("textBlock"),
   elResults: document.getElementById("formResults"),
-  elSubmit: document.getElementById("formAll"),
-  elUserText: document.getElementById("formText"),
-  elStartButton: document.getElementById("startButton"),
+  elSubmit: document.getElementById("formText"),
+  elButton: document.getElementById("buttonHolder"),
 
   gameStarter: function() {
-    Game.elStartButton.hidden = false;
-    Game.elStartButton.innerHTML = "Click to Start.";
-    Game.elStartButton.addEventListener("click", function() {
-      Game.gamePlayer();
-      Game.elStartButton.hidden = true;
-    });
+    Buttons.begin();
     Game.elTextBlock.innerHTML = "Get to ready to start! Click the button to start.";
   },
 
 
-  gamePlayer: function() {
+  gamePlayer: function(e) {
+    if (Game.roundNumber === textSource.length) {
+      Buttons.again();
+      Game.elTextBlock.innerHTML = "YOU WIN! Game over. Click the button to play again."
+      Game.elResults.innerHTML = "";
+    } else {
+    console.log("gamePlayer triggered.")
+    Buttons.kill();
     Game.renderTextBlock();
     // delay display
-    Game.elSubmit.addEventListener("submit", function(e) {
-      e.preventDefault();
-      Game.textB = e.target.formText.value;
-      console.log("textTwo is now: " + Game.textA);
-      Game.results = compare(Game.textA, Game.textB);
-      Game.elResults.innerHTML = Game.results;
-      resultsArray.push(Game.results);
-      console.log(resultsArray);
-      e.target.formText.value = null;
-      Game.winOrLose();
-    });
-    Game.roundNumber++;
-    console.log("roundNumber: " + Game.roundNumber);
+    Game.elSubmit.addEventListener("keypress", Game.captureText, true);
+  };
   },
 
+  captureText: function(e) {
+    e.preventDefault();
+    var key = e.which || e.keyCode;
+    if (key === 13) {
+      Game.elSubmit.removeEventListener("keypress");
+      Game.textB = e.currentTarget.value;
+      console.log("textB is now: " + Game.textB);
+      e.currentTarget.value = null;
+      Game.winOrLose();
+    };
+  },
+
+
   renderTextBlock: function() {
+    console.log("renderTextBlock triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
     Game.textA = textSource[Game.roundNumber];
+    console.log("textA is now: " + Game.textA);
   },
 
   winOrLose: function() {
-    console.log("winOrLose working");
+    console.log("winOrLose triggered.");
+    Game.results = compare(Game.textA, Game.textB);
+    Game.elResults.innerHTML = Game.results;
+    resultsArray.push(Game.results);
+    console.log(resultsArray);
     if (Game.results < 10) {
-      Game.elStartButton.hidden = false;
-      Game.elStartButton.innerHTML = "YOU WIN! Click for next round.";
-      // Game.gamePlayer();
+      Game.elSubmit.removeEventListener("keypress");
+      console.log("roundNumber " + Game.roundNumber + " is WON.")
+      Game.roundNumber += 1;
+      console.log("roundNumber: " + Game.roundNumber);
+      Buttons.nextround();
     } else if (Game.results >= 10) {
-      // Game.elResults.innerHTML = "You lose! Try again, LOSER."
-      Game.elStartButton.hidden = false;
-      Game.elStartButton.innerHTML = "LOSER! Click to try again.";
-      Game.elStartButton.addEventListener("click", Game.gameStarter);
+      Game.elSubmit.removeEventListener("keypress");
+      console.log("roundNumber " + Game.roundNumber + " is LOST.")
+      Buttons.loser();
       Game.elResults.innerHTML = "";
       Game.roundNumber = 0;
+      console.log("roundNumber: " + Game.roundNumber);
       resultsArray = [];
+      console.log(resultsArray);
     };
   },
 }
 
-window.onload = Game.gameStarter();
+var Buttons = {
 
+  begin: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gamePlayer()\">Click to Start!</button>";
+  },
+  nextround: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gamePlayer()\">Click for Next Round!</button>";
+  },
+  loser: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gameStarter()\">YOU LOST! Try Again, LOSER!</button>";
+  },
+  again: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gameStarter()\">Click to Play Again!</button>";
+  },
+  kill: function() {
+    Game.elButton.innerHTML = "";
+  },
+
+}
+
+
+window.onload = function() {
+  console.log("window.onload triggered.")
+  Game.gameStarter();
+};
 /*
 Copyright (c) 2011 Andrei Mackenzie
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
