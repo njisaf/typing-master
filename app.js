@@ -1,3 +1,28 @@
+window.onload = function() {
+  console.log("window.onload triggered.")
+  Game.gameStarter();
+};
+
+  var minionArray = [];
+
+  var ogre = new Minion("Obsessive Ogre", "5000", "background_red", "background_blue");
+  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
+  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
+  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
+  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
+  console.log(minionArray);
+
+  function Minion(name, speed, attack1, attack2) {
+    this.name = name;
+    this.speed = speed;
+    this.attack1 = attack1;
+    this.attack2 = attack2;
+    minionArray.push(this);
+  };
+
+
+
+
 var textSource = [
   "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
   "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
@@ -9,6 +34,7 @@ var resultsArray = [];
 
 var Game = {
   roundNumber: 0,
+  roundRunning: true,
   characterCount: 0,
   results: 0,
 
@@ -18,15 +44,19 @@ var Game = {
   elTextBlock: document.getElementById("textBlock"),
   elResults: document.getElementById("formResults"),
   elSubmit: document.getElementById("formText"),
+  elMinion: document.getElementById("minionHolder"),
   elButton: document.getElementById("buttonHolder"),
+  elBody: document.getElementById("mainBody"),
 
   gameStarter: function() {
     Buttons.begin();
     Game.elTextBlock.innerHTML = "Get to ready to start! Click the button to start.";
+    Game.elMinion.innerHTML = "Minion Hole";
   },
 
 
   gamePlayer: function(e) {
+    Game.roundRunning = true;
     if (Game.roundNumber === textSource.length) {
       Buttons.again();
       Game.elTextBlock.innerHTML = "YOU WIN! Game over. Click the button to play again."
@@ -34,7 +64,7 @@ var Game = {
     } else {
     console.log("gamePlayer triggered.")
     Buttons.kill();
-    Game.renderTextBlock();
+    Game.renderMinion();
     // delay display
     Game.elSubmit.addEventListener("keypress", Game.captureText, true);
   };
@@ -52,12 +82,39 @@ var Game = {
     };
   },
 
-
-  renderTextBlock: function() {
-    console.log("renderTextBlock triggered.")
+  renderMinion: function() {
+    console.log("renderMinion triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
+    Game.elMinion.innerHTML = minionArray[Game.roundNumber].name;
+    Game.minionAttack();
     Game.textA = textSource[Game.roundNumber];
     console.log("textA is now: " + Game.textA);
+  },
+
+  minionAttack: function() {
+    if (Game.roundRunning = true) {
+      setInterval(Game.attackDetect, minionArray[Game.roundNumber].speed);
+    } else if (Game.roundRunning = false) {
+      Game.elBody.className = "background_white";
+    } else {
+      console.log("minionAttack is broken");
+    }
+
+  },
+
+  attackDetect: function() {
+    if (Game.elBody.classList.contains("background_white")) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+      Game.minionAttack();
+    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack1)) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack2;
+      Game.minionAttack();
+    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack2)) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+      Game.minionAttack();
+    } else {
+      console.log("attackDetect is broken.")
+    }
   },
 
   winOrLose: function() {
@@ -71,10 +128,12 @@ var Game = {
       console.log("roundNumber " + Game.roundNumber + " is WON.")
       Game.roundNumber += 1;
       console.log("roundNumber: " + Game.roundNumber);
+      Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
       Game.elSubmit.removeEventListener("keypress");
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
+      Game.roundRunning = false;
       Buttons.loser();
       Game.elResults.innerHTML = "";
       Game.roundNumber = 0;
@@ -106,10 +165,6 @@ var Buttons = {
 }
 
 
-window.onload = function() {
-  console.log("window.onload triggered.")
-  Game.gameStarter();
-};
 /*
 Copyright (c) 2011 Andrei Mackenzie
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
