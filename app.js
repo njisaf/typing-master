@@ -1,87 +1,107 @@
-function compare(a, b){
-  if(a.length == 0) return b.length;
-  if(b.length == 0) return a.length;
+// function compare(a, b){
+//   if(a.length == 0) return b.length;
+//   if(b.length == 0) return a.length;
 
-  var matrix = [];
+//   var matrix = [];
 
-  // increment along the first column of each row
-  var i;
-  for(i = 0; i <= b.length; i++){
-    matrix[i] = [i];
-  }
+//   // increment along the first column of each row
+//   var i;
+//   for(i = 0; i <= b.length; i++){
+//     matrix[i] = [i];
+//   }
 
-  // increment each column in the first row
-  var j;
-  for(j = 0; j <= a.length; j++){
-    matrix[0][j] = j;
-  }
+//   // increment each column in the first row
+//   var j;
+//   for(j = 0; j <= a.length; j++){
+//     matrix[0][j] = j;
+//   }
 
-  // Fill in the rest of the matrix
-  for(i = 1; i <= b.length; i++){
-    for(j = 1; j <= a.length; j++){
-      if(b.charAt(i-1) == a.charAt(j-1)){
-        matrix[i][j] = matrix[i-1][j-1];
-      } else {
-        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
-                                Math.min(matrix[i][j-1] + 1, // insertion
-                                         matrix[i-1][j] + 1)); // deletion
-      }
-    }
-  }
+//   // Fill in the rest of the matrix
+//   for(i = 1; i <= b.length; i++){
+//     for(j = 1; j <= a.length; j++){
+//       if(b.charAt(i-1) == a.charAt(j-1)){
+//         matrix[i][j] = matrix[i-1][j-1];
+//       } else {
+//         matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+//                                 Math.min(matrix[i][j-1] + 1, // insertion
+//                                          matrix[i-1][j] + 1)); // deletion
+//       }
+//     }
+//   }
 
-  return matrix[b.length][a.length];
-};
+//   return matrix[b.length][a.length];
+// };
 
-var textOne = "Apples and Oranges";
+// var textOne = "Apples and Oranges";
 
-var textTwo = "Apples and Oranges";
+// var textTwo = "Apples and Oranges";
 
-console.log(compare(textOne, textTwo));
+// console.log(compare(textOne, textTwo));
 
-var levelMod = 1.5;
-var characterCount = 1000;
+// var levelMod = 1.5;
+// var characterCount = 1000;
 
-var distractions = {
-  distractionOne: setInterval(effectOne, 5000 * levelMod), 
-  distractionTwo: setInterval(effectOne, 12500 * levelMod),
-  distractionThree:
-  distractionFour:
-  dirsractionFive:
-  distractionSix:
-}
+// var distractions = {
+//   distractionOne: setInterval(effectOne, 5000 * levelMod), 
+//   distractionTwo: setInterval(effectOne, 12500 * levelMod),
+// }
 
-function startTimer(duration, display) {
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        // get the number of seconds that have elapsed since 
-        // startTimer() was called
-        diff = duration - (((Date.now() - start) / 1000) | 0);
+var timerStartEl = document.getElementById("timerStart");
+var timerStopEl = document.getElementById("timerStop")
+var timerEl = document.getElementById("timer");
 
-        // does the same job as parseInt truncates the float
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds; 
+        display.textContent = minutes + ":" + seconds;
 
-        if (diff <= 0) {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
+        if (--timer < 0) {
+            console.log("Time's Up")
         }
     };
-    // we don't want to wait a full second before the timer starts
-    timer();
-    setInterval(timer, 1000);
+    sInterval = setInterval(tick, 1000)
 }
 
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
+function startTimer() {
+    var setDuration = 60 * .25,
+        display = timerEl;
+    myTimer(setDuration, display);
 };
+timerStopEl.addEventListener("click", function(){
+  console.log("stop click");
+  clearInterval(sInterval)
+})
+
+timerStartEl.addEventListener("click", function(){
+  console.log("start click");
+  startTimer();
+});
+
+// var givenTime = 10000
+// var timeLimit = 90000
+// var clockInterval = 10
+// resetClock()
+// function updateClock(){
+//     var now = new Date().getTime(); 
+//     if (now < timeLimit){
+//       var currentTime = timeLimit - now;
+//       timerEl.textContent = currentTime;
+//     } else {
+//       clearInterval(clockInterval)
+//     };
+// };
+// function resetClock(){
+//     timeLimit = new Date().getTime() + givenTime
+//     clearInterval(clockInterval);
+//     clockInterval = setInterval(updateClock,10);
+//     console.log("reset");
+// };
+
+// timerStartEl.addEventListener("click", resetClock());
