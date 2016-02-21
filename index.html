@@ -2,13 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="animate.css"> -->
     <link rel="stylesheet" href="style.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
     <!-- <script src="./Vendors/Rita/rita-full.js"></script> -->
     <title>Juicy Typing Master</title>
   </head>
-  <body class="background_white" id="mainBody">
+  <body id="stage">
     <section class="container" id="mainElements">
+    <section>
+      <h1>Juicy Typing Master!</h1>
+    </section>
     <section>
       <p id="minionHolder">Minion goes here.</p>
     </section>
@@ -23,13 +27,16 @@
         <input type="text" size="70" autocomplete="off" id="formText">
       </form>
     </section>
-    <section>
+    <section class="container">
       <p id="buttonHolder"> </p>
     </section>
-    <section>
+    <section class="container">
       <p id="formResults"></p>
     </section>
     </section>
+    <div id="traveler">
+      <div id="bouncer"><img src="images/ogre_club.png"></div>
+    </div>
     <script src="text.js"></script>
     <script src="app.js"></script>
   </body>

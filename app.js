@@ -3,22 +3,27 @@ window.onload = function() {
   Game.gameStarter();
 };
 
-  var minionArray = [];
+var Minions = {
 
-  var ogre = new Minion("Obsessive Ogre", "5000", "background_red", "background_blue");
-  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
-  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
-  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
-  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
-  console.log(minionArray);
+  minionArray: [];
 
-  function Minion(name, speed, attack1, attack2) {
+  ogre: new Minion("Obsessive Ogre", "10000", "background_red", "background_blue"),
+  rat: new Minion("Ratchet Rodent", "10000", "background_yellow", "background_green"),
+  wizard: new Minion("Wispering Wizard", "10000", "background_red", "background_yellow"),
+  bunny: new Minion("Bizarre Bunny", "10000", "background_blue", "background_green"),
+  spectre: new Minion("Spangley Spectre", "10000", "background_red", "background_white"),
+  // console.log(minionArray);
+
+  Minion: function(name, speed, attack1, attack2) {
     this.name = name;
     this.speed = speed;
     this.attack1 = attack1;
     this.attack2 = attack2;
-    minionArray.push(this);
-  };
+    Minions.minionArray.push(this);
+  },
+
+};
+
 
 var timerEl = document.getElementById("timer");
 
@@ -53,7 +58,7 @@ function myTimer(duration, display) {
 }
 
 function startTimer() {
-    var setDuration = 60 * .25,
+    var setDuration = 60 * 0.25,
         display = timerEl;
     myTimer(setDuration, display);
 };
