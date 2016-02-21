@@ -1,20 +1,14 @@
 window.onload = function() {
   console.log("window.onload triggered.")
   Game.gameStarter();
+  Minions.buildMinions();
 };
 
 var Minions = {
 
   minionArray: [],
 
-  ogre: new Minions.Minion("Obsessive Ogre", "background_red", "background_blue"),
-  rat: new Minions.Minion("Ratchet Rodent", "background_yellow", "background_green"),
-  wizard: new Minions.Minion("Wispering Wizard", "background_red", "background_yellow"),
-  bunny: new Minions.Minion("Bizarre Bunny", "background_blue", "background_green"),
-  spectre: new Minions.Minion("Spangley Spectre", "background_red", "background_white"),
-  // console.log(minionArray);
-
-  Minion: function(name, speed, attack1, attack2) {
+  Builder: function(name, speed, attack1, attack2) {
     this.name = name;
     // this.speed = speed;
     this.attack1 = attack1;
@@ -22,6 +16,13 @@ var Minions = {
     Minions.minionArray.push(this);
   },
 
+  buildMinions: function() {
+    var ogre = new Minions.Builder("Obsessive Ogre", "background_red", "background_blue");
+    var rat = new Minions.Builder("Ratchet Rodent", "background_yellow", "background_green");
+    var wizard = new Minions.Builder("Wispering Wizard", "background_red", "background_yellow");
+    var bunny = new Minions.Builder("Bizarre Bunny", "background_blue", "background_green");
+    var spectre = new Minions.Builder("Spangley Spectre", "background_red", "background_white");
+  },
 };
 
 var timerEl = document.getElementById("timer");
