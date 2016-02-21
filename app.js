@@ -5,18 +5,18 @@ window.onload = function() {
 
 var Minions = {
 
-  minionArray: [];
+  minionArray: [],
 
-  ogre: new Minion("Obsessive Ogre", "10000", "background_red", "background_blue"),
-  rat: new Minion("Ratchet Rodent", "10000", "background_yellow", "background_green"),
-  wizard: new Minion("Wispering Wizard", "10000", "background_red", "background_yellow"),
-  bunny: new Minion("Bizarre Bunny", "10000", "background_blue", "background_green"),
-  spectre: new Minion("Spangley Spectre", "10000", "background_red", "background_white"),
+  ogre: new Minions.Minion("Obsessive Ogre", "background_red", "background_blue"),
+  rat: new Minions.Minion("Ratchet Rodent", "background_yellow", "background_green"),
+  wizard: new Minions.Minion("Wispering Wizard", "background_red", "background_yellow"),
+  bunny: new Minions.Minion("Bizarre Bunny", "background_blue", "background_green"),
+  spectre: new Minions.Minion("Spangley Spectre", "background_red", "background_white"),
   // console.log(minionArray);
 
   Minion: function(name, speed, attack1, attack2) {
     this.name = name;
-    this.speed = speed;
+    // this.speed = speed;
     this.attack1 = attack1;
     this.attack2 = attack2;
     Minions.minionArray.push(this);
