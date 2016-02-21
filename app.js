@@ -20,8 +20,7 @@ window.onload = function() {
     minionArray.push(this);
   };
 
-
-
+var timerEl = document.getElementById("timer");
 
 var textSource = [
   "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
@@ -31,6 +30,33 @@ var textSource = [
   "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants."
 ];
 var resultsArray = [];
+
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log("Time's Up");
+            clearInterval(sInterval);
+            lose();
+        }
+    };
+    sInterval = setInterval(tick, 1000)
+}
+
+function startTimer() {
+    var setDuration = 60 * .25,
+        display = timerEl;
+    myTimer(setDuration, display);
+};
 
 var Game = {
   roundNumber: 0,
@@ -64,6 +90,8 @@ var Game = {
     } else {
     console.log("gamePlayer triggered.")
     Buttons.kill();
+    console.log("start clock");
+    startTimer();
     Game.renderMinion();
     // delay display
     Game.elSubmit.addEventListener("keypress", Game.captureText, true);
@@ -72,6 +100,8 @@ var Game = {
 
   captureText: function(e) {
     e.preventDefault();
+    console.log("stop clock");
+    clearInterval(sInterval)
     var key = e.which || e.keyCode;
     if (key === 13) {
       Game.elSubmit.removeEventListener("keypress");
@@ -131,6 +161,12 @@ var Game = {
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
+      lose();
+    };
+  },
+}
+
+function lose(){
       Game.elSubmit.removeEventListener("keypress");
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
       Game.roundRunning = false;
@@ -140,8 +176,6 @@ var Game = {
       console.log("roundNumber: " + Game.roundNumber);
       resultsArray = [];
       console.log(resultsArray);
-    };
-  },
 }
 
 var Buttons = {
