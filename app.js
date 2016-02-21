@@ -5,7 +5,7 @@ window.onload = function() {
 
   var minionArray = [];
 
-  var ogre = new Minion("Obsessive Ogre", "5000", "background_red", "background_blue");
+  var ogre = new Minion("Obsessive Ogre", "10000", "background_red", "background_blue");
   var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
   var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
   var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
@@ -53,7 +53,7 @@ function myTimer(duration, display) {
 }
 
 function startTimer() {
-    var setDuration = 60 * .25,
+    var setDuration = 60 * 1,
         display = timerEl;
     myTimer(setDuration, display);
 };
@@ -80,35 +80,32 @@ var Game = {
     Game.elMinion.innerHTML = "Minion Hole";
   },
 
-
   gamePlayer: function(e) {
     Game.roundRunning = true;
     if (Game.roundNumber === textSource.length) {
       Buttons.again();
-      Game.elTextBlock.innerHTML = "YOU WIN! Game over. Click the button to play again."
       Game.elResults.innerHTML = "";
     } else {
-    console.log("gamePlayer triggered.")
-    Buttons.kill();
-    console.log("start clock");
-    startTimer();
-    Game.renderMinion();
-    // delay display
-    Game.elSubmit.addEventListener("keypress", Game.captureText, true);
-  };
+      console.log("gamePlayer triggered.")
+      Buttons.kill();
+      Game.elSubmit.addEventListener("keypress", Game.captureText, true);
+      console.log("start clock");
+      startTimer();
+      Game.renderMinion();
+      // delay display
+    };
   },
 
   captureText: function(e) {
-    e.preventDefault();
-    console.log("stop clock");
-    clearInterval(sInterval)
-    var key = e.which || e.keyCode;
-    if (key === 13) {
-      Game.elSubmit.removeEventListener("keypress");
+    if (e.keyCode === 13 || e.which === 13) {
+      console.log("stop clock");
+      clearInterval(sInterval);
+      clearInterval(atkInterval);
       Game.textB = e.currentTarget.value;
       console.log("textB is now: " + Game.textB);
       e.currentTarget.value = null;
       Game.winOrLose();
+      Game.elSubmit.removeEventListener("keypress", Game.captureText, true);
     };
   },
 
@@ -123,7 +120,7 @@ var Game = {
 
   minionAttack: function() {
     if (Game.roundRunning = true) {
-      setInterval(Game.attackDetect, minionArray[Game.roundNumber].speed);
+      atkInterval = setInterval(Game.attackDetect, minionArray[Game.roundNumber].speed);
     } else if (Game.roundRunning = false) {
       Game.elBody.className = "background_white";
     } else {
@@ -135,7 +132,7 @@ var Game = {
   attackDetect: function() {
     if (Game.elBody.classList.contains("background_white")) {
       Game.elBody.className = minionArray[Game.roundNumber].attack1;
-      Game.minionAttack();
+      // Game.minionAttack();
     } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack1)) {
       Game.elBody.className = minionArray[Game.roundNumber].attack2;
       Game.minionAttack();
@@ -154,20 +151,22 @@ var Game = {
     resultsArray.push(Game.results);
     console.log(resultsArray);
     if (Game.results < 10) {
-      Game.elSubmit.removeEventListener("keypress");
+      // Game.elSubmit.removeEventListener("keypress");
+      Game.elTextBlock.innerHTML = "YOU WIN! Click the button to start the next round."
       console.log("roundNumber " + Game.roundNumber + " is WON.")
       Game.roundNumber += 1;
       console.log("roundNumber: " + Game.roundNumber);
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
+      console.log("Round lost")
       lose();
     };
   },
 }
 
 function lose(){
-      Game.elSubmit.removeEventListener("keypress");
+      // Game.elSubmit.removeEventListener("keypress");
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
       Game.roundRunning = false;
       Buttons.loser();
