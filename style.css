@@ -22,7 +22,7 @@ body {
   align-items: center;
 }
 
-#stage {
+.stage {
   position: relative;
   margin: 1em auto;
   width: 660px;
