@@ -5,7 +5,16 @@ window.onload = function() {
 
 var Minions = {
 
+<<<<<<< HEAD
   minionArray: [];
+=======
+  var ogre = new Minion("Obsessive Ogre", "10000", "background_red", "background_blue");
+  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
+  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
+  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
+  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
+  console.log(minionArray);
+>>>>>>> master
 
   ogre: new Minion("Obsessive Ogre", "10000", "background_red", "background_blue"),
   rat: new Minion("Ratchet Rodent", "10000", "background_yellow", "background_green"),
