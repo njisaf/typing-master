@@ -1,3 +1,27 @@
+window.onload = function() {
+  console.log("window.onload triggered.")
+  Game.gameStarter();
+};
+
+  var minionArray = [];
+
+  var ogre = new Minion("Obsessive Ogre", "5000", "background_red", "background_blue");
+  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
+  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
+  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
+  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
+  console.log(minionArray);
+
+  function Minion(name, speed, attack1, attack2) {
+    this.name = name;
+    this.speed = speed;
+    this.attack1 = attack1;
+    this.attack2 = attack2;
+    minionArray.push(this);
+  };
+
+var timerEl = document.getElementById("timer");
+
 var textSource = [
   "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
   "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
@@ -7,8 +31,36 @@ var textSource = [
 ];
 var resultsArray = [];
 
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log("Time's Up");
+            clearInterval(sInterval);
+            lose();
+        }
+    };
+    sInterval = setInterval(tick, 1000)
+}
+
+function startTimer() {
+    var setDuration = 60 * .25,
+        display = timerEl;
+    myTimer(setDuration, display);
+};
+
 var Game = {
   roundNumber: 0,
+  roundRunning: true,
   characterCount: 0,
   results: 0,
 
@@ -17,63 +69,135 @@ var Game = {
 
   elTextBlock: document.getElementById("textBlock"),
   elResults: document.getElementById("formResults"),
-  elSubmit: document.getElementById("formAll"),
-  elUserText: document.getElementById("formText"),
-  elStartButton: document.getElementById("startButton"),
+  elSubmit: document.getElementById("formText"),
+  elMinion: document.getElementById("minionHolder"),
+  elButton: document.getElementById("buttonHolder"),
+  elBody: document.getElementById("mainBody"),
 
   gameStarter: function() {
-    Game.elStartButton.hidden = false;
-    Game.elStartButton.innerHTML = "Click to Start.";
-    Game.elStartButton.addEventListener("click", function() {
-      Game.gamePlayer();
-      Game.elStartButton.hidden = true;
-    });
+    Buttons.begin();
     Game.elTextBlock.innerHTML = "Get to ready to start! Click the button to start.";
+    Game.elMinion.innerHTML = "Minion Hole";
   },
 
 
-  gamePlayer: function() {
-    Game.renderTextBlock();
+  gamePlayer: function(e) {
+    Game.roundRunning = true;
+    if (Game.roundNumber === textSource.length) {
+      Buttons.again();
+      Game.elTextBlock.innerHTML = "YOU WIN! Game over. Click the button to play again."
+      Game.elResults.innerHTML = "";
+    } else {
+    console.log("gamePlayer triggered.")
+    Buttons.kill();
+    console.log("start clock");
+    startTimer();
+    Game.renderMinion();
     // delay display
-    Game.elSubmit.addEventListener("submit", function(e) {
-      e.preventDefault();
-      Game.textB = e.target.formText.value;
-      console.log("textTwo is now: " + Game.textA);
-      Game.results = compare(Game.textA, Game.textB);
-      Game.elResults.innerHTML = Game.results;
-      resultsArray.push(Game.results);
-      console.log(resultsArray);
-      e.target.formText.value = null;
-      Game.winOrLose();
-    });
-    Game.roundNumber++;
-    console.log("roundNumber: " + Game.roundNumber);
+    Game.elSubmit.addEventListener("keypress", Game.captureText, true);
+  };
   },
 
-  renderTextBlock: function() {
+  captureText: function(e) {
+    e.preventDefault();
+    console.log("stop clock");
+    clearInterval(sInterval)
+    var key = e.which || e.keyCode;
+    if (key === 13) {
+      Game.elSubmit.removeEventListener("keypress");
+      Game.textB = e.currentTarget.value;
+      console.log("textB is now: " + Game.textB);
+      e.currentTarget.value = null;
+      Game.winOrLose();
+    };
+  },
+
+  renderMinion: function() {
+    console.log("renderMinion triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
+    Game.elMinion.innerHTML = minionArray[Game.roundNumber].name;
+    Game.minionAttack();
     Game.textA = textSource[Game.roundNumber];
+    console.log("textA is now: " + Game.textA);
+  },
+
+  minionAttack: function() {
+    if (Game.roundRunning = true) {
+      setInterval(Game.attackDetect, minionArray[Game.roundNumber].speed);
+    } else if (Game.roundRunning = false) {
+      Game.elBody.className = "background_white";
+    } else {
+      console.log("minionAttack is broken");
+    }
+
+  },
+
+  attackDetect: function() {
+    if (Game.elBody.classList.contains("background_white")) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+      Game.minionAttack();
+    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack1)) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack2;
+      Game.minionAttack();
+    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack2)) {
+      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+      Game.minionAttack();
+    } else {
+      console.log("attackDetect is broken.")
+    }
   },
 
   winOrLose: function() {
-    console.log("winOrLose working");
+    console.log("winOrLose triggered.");
+    Game.results = compare(Game.textA, Game.textB);
+    Game.elResults.innerHTML = Game.results;
+    resultsArray.push(Game.results);
+    console.log(resultsArray);
     if (Game.results < 10) {
-      Game.elStartButton.hidden = false;
-      Game.elStartButton.innerHTML = "YOU WIN! Click for next round.";
-      // Game.gamePlayer();
+      Game.elSubmit.removeEventListener("keypress");
+      console.log("roundNumber " + Game.roundNumber + " is WON.")
+      Game.roundNumber += 1;
+      console.log("roundNumber: " + Game.roundNumber);
+      Game.roundRunning = false;
+      Buttons.nextround();
     } else if (Game.results >= 10) {
-      // Game.elResults.innerHTML = "You lose! Try again, LOSER."
-      Game.elStartButton.hidden = false;
-      Game.elStartButton.innerHTML = "LOSER! Click to try again.";
-      Game.elStartButton.addEventListener("click", Game.gameStarter);
-      Game.elResults.innerHTML = "";
-      Game.roundNumber = 0;
-      resultsArray = [];
+      lose();
     };
   },
 }
 
-window.onload = Game.gameStarter();
+function lose(){
+      Game.elSubmit.removeEventListener("keypress");
+      console.log("roundNumber " + Game.roundNumber + " is LOST.")
+      Game.roundRunning = false;
+      Buttons.loser();
+      Game.elResults.innerHTML = "";
+      Game.roundNumber = 0;
+      console.log("roundNumber: " + Game.roundNumber);
+      resultsArray = [];
+      console.log(resultsArray);
+}
+
+var Buttons = {
+
+  begin: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gamePlayer()\">Click to Start!</button>";
+  },
+  nextround: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gamePlayer()\">Click for Next Round!</button>";
+  },
+  loser: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gameStarter()\">YOU LOST! Try Again, LOSER!</button>";
+  },
+  again: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gameStarter()\">Click to Play Again!</button>";
+  },
+  kill: function() {
+    Game.elButton.innerHTML = "";
+  },
+
+}
+
 
 /*
 Copyright (c) 2011 Andrei Mackenzie

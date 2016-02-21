@@ -3,28 +3,34 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <!-- <script src="./Vendors/Rita/rita-full.js"></script> -->
     <title>Juicy Typing Master</title>
   </head>
-  <body class="container">
-    <section id="mainElements">
+  <body class="background_white" id="mainBody">
+    <section class="container" id="mainElements">
+    <section>
+      <p id="minionHolder">Minion goes here.</p>
+    </section>
     <section class="container">
       <p id="textBlock">Text here</p>
     </section>
     <section class="container">
-      <!-- timer -->
+      <p id="timer"></p>
     </section>
-    <section class="container" id="formAll">
-      <form>
-        <input type="text" size="70" id="formText">
+    <section class="container">
+      <form id="formAll">
+        <input type="text" size="70" autocomplete="off" id="formText">
       </form>
     </section>
     <section>
-      <button id="startButton">Press to Start</button>
+      <p id="buttonHolder"> </p>
     </section>
     <section>
       <p id="formResults"></p>
     </section>
     </section>
+    <script src="text.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
