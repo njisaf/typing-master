@@ -5,95 +5,58 @@ window.onload = function() {
 
   var minionArray = [];
 
-  var ogre = new Minion("Obsessive Ogre", "20000", "discworld", "background_red", "background_blue");
-  var rat = new Minion("Ratchet Rodent", "20000", "storm", "background_yellow", "background_green");
-  var wizard = new Minion("Wispering Wizard", "20000", "discworld", "background_red", "background_yellow");
-  var bunny = new Minion("Bizarre Bunny", "20000", "storm", "background_blue", "background_green");
-  var spectre = new Minion("Spangley Spectre", "20000", "discworld", "background_red", "background_white");
+  var ogre = new Minion("Obsessive Ogre", "5000", "background_red", "background_blue");
+  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
+  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
+  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
+  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
   console.log(minionArray);
 
-  function Minion(name, speed, textsrc, attack1, attack2) {
+  function Minion(name, speed, attack1, attack2) {
     this.name = name;
     this.speed = speed;
-    this.textsrc = textsrc;
     this.attack1 = attack1;
     this.attack2 = attack2;
     minionArray.push(this);
   };
 
+var timerEl = document.getElementById("timer");
 
-var TextBuilder = {
-
-  // sentences is the number of full sentences (period to period) will be returned.
-  sentences: 2,
-  stringArray: [],
-  startIndex: 0,
-  endIndex: 0,
-
-  runThis: function() {
-    TextBuilder.splitter();
-    TextBuilder.findStartEnd();
-    console.log("startIndex is: " + TextBuilder.startIndex);
-    console.log("endIndex is: " + TextBuilder.endIndex);
-    TextBuilder.buildSentences();
-    console.log("textA is now: " + Game.textA);
-  },
-
-  getRandom: function(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  },
-
-  splitter: function() {
-    var findTextSrc = minionArray[Game.roundNumber].textsrc;
-    var re = /\./g;
-    console.log(findTextSrc);
-    if (findTextSrc === "discworld") {
-      var loadTextSrc = TextSource.discworld.replace(re, " .");
-      console.log(loadTextSrc);
-      TextBuilder.stringArray = loadTextSrc.split(" ");
-      console.log("discworld loaded into stringArray");
-    } else if (findTextSrc === "storm") {
-      var loadTextSrc = TextSource.storm.replace(re, " .");
-      console.log(loadTextSrc);
-      TextBuilder.stringArray = loadTextSrc.split(" ");
-      console.log("storm loaded into stringArray");
-    } else {
-      console.log("TextBuilder splitter is broken.")
-    };
-  },
-
-  findStartEnd: function() {
-    var indices = [];
-    var element = ".";
-    var index = TextBuilder.stringArray.indexOf(element);
-      while (index != -1) {
-        indices.push(index);
-        index = TextBuilder.stringArray.indexOf(element, index + 1);
-      };
-    console.log("Indices found: " + indices);
-    var indicesRandom = indices[TextBuilder.getRandom(0, indices.length)];
-    var indicesRandomIndex = indices.indexOf(indicesRandom);
-    console.log("indicesRandomIndex: " + indicesRandomIndex);
-    var indicesEnd = indicesRandomIndex + (TextBuilder.sentence + 1);
-    TextBuilder.startIndex = indicesRandom;
-    TextBuilder.endIndex = indices[indicesEnd];
-  },
-
-  buildSentences: function() {
-    var sentenceArray = TextBuilder.stringArray.slice(TextBuilder.startIndex, TextBuilder.endIndex);
-    console.log("sentenceArray: " + sentenceArray);
-    Game.textA = sentenceArray.join(" ");
-  },
-};
-
-// var textSource = [
-//   "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
-//   "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
-//   "Through sea-sized eyes that are crusted with rheum and asteroid dust He stares fixedly at the Destination.",
-//   "In a brain bigger than a city, with geological slowness, He thinks only of the Weight.",
-//   "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants."
-// ];
+var textSource = [
+  "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
+  "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
+  "Through sea-sized eyes that are crusted with rheum and asteroid dust He stares fixedly at the Destination.",
+  "In a brain bigger than a city, with geological slowness, He thinks only of the Weight.",
+  "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants."
+];
 var resultsArray = [];
+
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log("Time's Up");
+            clearInterval(sInterval);
+            lose();
+        }
+    };
+    sInterval = setInterval(tick, 1000)
+}
+
+function startTimer() {
+    var setDuration = 60 * .25,
+        display = timerEl;
+    myTimer(setDuration, display);
+};
 
 var Game = {
   roundNumber: 0,
@@ -120,14 +83,15 @@ var Game = {
 
   gamePlayer: function(e) {
     Game.roundRunning = true;
-    // game is counting minions to determine how many rounds there are overall. May need to tweak!!!
-    if (Game.roundNumber === minionArray.length) {
+    if (Game.roundNumber === textSource.length) {
       Buttons.again();
       Game.elTextBlock.innerHTML = "YOU WIN! Game over. Click the button to play again."
       Game.elResults.innerHTML = "";
     } else {
     console.log("gamePlayer triggered.")
     Buttons.kill();
+    console.log("start clock");
+    startTimer();
     Game.renderMinion();
     // delay display
     Game.elSubmit.addEventListener("keypress", Game.captureText, true);
@@ -136,6 +100,8 @@ var Game = {
 
   captureText: function(e) {
     e.preventDefault();
+    console.log("stop clock");
+    clearInterval(sInterval)
     var key = e.which || e.keyCode;
     if (key === 13) {
       Game.elSubmit.removeEventListener("keypress");
@@ -148,12 +114,11 @@ var Game = {
 
   renderMinion: function() {
     console.log("renderMinion triggered.")
-    TextBuilder.runThis();
-    Game.elTextBlock.innerHTML = Game.textA;
+    Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
     Game.elMinion.innerHTML = minionArray[Game.roundNumber].name;
     Game.minionAttack();
-    // Game.textA = textSource[Game.roundNumber];
-    // console.log("textA is now: " + Game.textA);
+    Game.textA = textSource[Game.roundNumber];
+    console.log("textA is now: " + Game.textA);
   },
 
   minionAttack: function() {
@@ -196,6 +161,12 @@ var Game = {
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
+      lose();
+    };
+  },
+}
+
+function lose(){
       Game.elSubmit.removeEventListener("keypress");
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
       Game.roundRunning = false;
@@ -205,8 +176,6 @@ var Game = {
       console.log("roundNumber: " + Game.roundNumber);
       resultsArray = [];
       console.log(resultsArray);
-    };
-  },
 }
 
 var Buttons = {
