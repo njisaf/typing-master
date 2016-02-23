@@ -53,7 +53,7 @@ function myTimer(duration, display) {
 }
 
 function startTimer() {
-    var setDuration = 60 * .25,
+    var setDuration = 60 * 0.25,
         display = timerEl;
     myTimer(setDuration, display);
 };

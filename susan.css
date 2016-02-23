@@ -1,7 +1,7 @@
 
 
 /*following css extracted from animate.css Bounce css for animation in typing text*/
-.animated.bounceIn,
+/*.animated.bounceIn,
 .animated.bounceOut {
   -webkit-animation-duration: .75s;
   animation-duration: .75s;
@@ -70,7 +70,7 @@
   transform-origin: center bottom;
 }
 /**extracted from animate.css Do we want to use the flash example for the typing text?*/
-@-webkit-keyframes flash {
+/*@-webkit-keyframes flash {
   from, 50%, to {
     opacity: 1;
   }
@@ -96,7 +96,7 @@
 }
 
 /*extracted from animate.css Do we want to use the fade in down example for the typing text?*/
-@-webkit-keyframes fadeInDown {
+/*@-webkit-keyframes fadeInDown {
   from {
     opacity: 0;
     -webkit-transform: translate3d(0, -100%, 0);
@@ -204,7 +204,7 @@
 }
 /*Not sure if the below credit is for the hinge animation or rollIn animation under animate css*/
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-
+/*
 -webkit-keyframes slideInUp {
   from {
     -webkit-transform: translate3d(0, 100%, 0);
@@ -234,14 +234,48 @@
 .slideInUp {
   -webkit-animation-name: slideInUp;
   animation-name: slideInUp;
-}
+}*/
 
-/*img src="http://www.w3schools.com/css/img_lights.jpg"*/ an idea of aurorea borealis for typing master background image
-<div class="img">
+/*img src="http://www.w3schools.com/css/img_lights.jpg"*/
+/*<div class="img">
   <a target="_blank" href="lights.jpg">
     <img src="lights.jpg" alt="Northern Lights" width="300" height="200">
   </a>
   <div class="desc">Add a description of the image here</div>
-</div>
+</div>/
 
 /*in www.w3schools.com/css, may consider using CSS3 and border images and/or others*/
+
+.surfer {
+  border: 1px dashed #666;
+  width: 250px;
+  height: 250px;
+  position: relative;
+  animation-name: surfer;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+@keyframes surfer {
+  from {
+    top: 100%;
+    left: 100%;
+  }
+  25% {
+    top: 100%;
+    left: 0%;
+  }
+  50% {
+    top: 0%;
+    left: 0%;
+  }
+  75% {
+    top: 0%;
+    left: 100%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
