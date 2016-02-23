@@ -2,17 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="animate.css"> -->
     <link rel="stylesheet" href="style.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
     <!-- <script src="./Vendors/Rita/rita-full.js"></script> -->
     <title>Juicy Typing Master</title>
   </head>
   <body class="stage" id="mainBody">
+    <img class="zoomIn" id="zoomer" src="images/shrek.jpg" hidden>
+    <img class="surf" id="surfer" src="images/rubberduck.jpg" hidden>
     <section class="container background_white" id="mainElements">
     <section>
       <p id="minionHolder">Minion goes here.</p>
     </section>
-    <section class="container">
+    <section class="container textBox">
       <p id="textBlock">Text here</p>
     </section>
     <section class="container">
@@ -28,9 +31,9 @@
       <p id="formResults"></p>
     </section>
     </section>
-    <!-- <div id="traveler">
-      <div id="bouncer"><img src="images/ogre_club.png"></div>
-    </div> -->
+    <div id="traveler">
+      <div id="bouncer" hidden><img src="images/ogre_club.png"></div>
+    </div>
     <script src="text.js"></script>
     <script src="app.js"></script>
   </body>
