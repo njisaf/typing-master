@@ -1,24 +1,29 @@
 window.onload = function() {
   console.log("window.onload triggered.")
   Game.gameStarter();
+  Minions.buildMinions();
 };
 
-  var minionArray = [];
+var Minions = {
 
-  var ogre = new Minion("Obsessive Ogre", "10000", "background_red", "background_blue");
-  var rat = new Minion("Ratchet Rodent", "5000", "background_yellow", "background_green");
-  var wizard = new Minion("Wispering Wizard", "5000", "background_red", "background_yellow");
-  var bunny = new Minion("Bizarre Bunny", "5000", "background_blue", "background_green");
-  var spectre = new Minion("Spangley Spectre", "5000", "background_red", "background_white");
-  console.log(minionArray);
+  minionArray: [],
 
-  function Minion(name, speed, attack1, attack2) {
+  Builder: function(name, speed, attack1, attack2) {
     this.name = name;
-    this.speed = speed;
+    // this.speed = speed;
     this.attack1 = attack1;
     this.attack2 = attack2;
-    minionArray.push(this);
-  };
+    Minions.minionArray.push(this);
+  },
+
+  buildMinions: function() {
+    var ogre = new Minions.Builder("Obsessive Ogre", "background_red", "background_blue");
+    var rat = new Minions.Builder("Ratchet Rodent", "background_yellow", "background_green");
+    var wizard = new Minions.Builder("Wispering Wizard", "background_red", "background_yellow");
+    var bunny = new Minions.Builder("Bizarre Bunny", "background_blue", "background_green");
+    var spectre = new Minions.Builder("Spangley Spectre", "background_red", "background_white");
+  },
+};
 
 var timerEl = document.getElementById("timer");
 
@@ -85,7 +90,7 @@ var Game = {
   renderMinion: function() {
     console.log("renderMinion triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
-    Game.elMinion.innerHTML = minionArray[Game.roundNumber].name;
+    Game.elMinion.innerHTML = Minions.minionArray[Game.roundNumber].name;
     Game.minionAttack();
     Game.textA = textSource[Game.roundNumber];
     console.log("textA is now: " + Game.textA);
@@ -93,7 +98,7 @@ var Game = {
 
   minionAttack: function() {
     if (Game.roundRunning = true) {
-      atkInterval = setInterval(Game.attackDetect, minionArray[Game.roundNumber].speed);
+      atkInterval = setInterval(Game.attackDetect, Minions.minionArray[Game.roundNumber].speed);
     } else if (Game.roundRunning = false) {
       Game.elBody.className = "background_white";
     } else {
@@ -104,13 +109,13 @@ var Game = {
 
   attackDetect: function() {
     if (Game.elBody.classList.contains("background_white")) {
-      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+      Game.elBody.className = Minions.minionArray[Game.roundNumber].attack1;
       // Game.minionAttack();
-    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack1)) {
-      Game.elBody.className = minionArray[Game.roundNumber].attack2;
+    } else if (Game.elBody.classList.contains(Minions.minionArray[Game.roundNumber].attack1)) {
+      Game.elBody.className = Minions.minionArray[Game.roundNumber].attack2;
       Game.minionAttack();
-    } else if (Game.elBody.classList.contains(minionArray[Game.roundNumber].attack2)) {
-      Game.elBody.className = minionArray[Game.roundNumber].attack1;
+    } else if (Game.elBody.classList.contains(Minions.minionArray[Game.roundNumber].attack2)) {
+      Game.elBody.className = Minions.minionArray[Game.roundNumber].attack1;
       Game.minionAttack();
     } else {
       console.log("attackDetect is broken.")
