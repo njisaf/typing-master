@@ -31,33 +31,6 @@ var textSource = [
 ];
 var resultsArray = [];
 
-function myTimer(duration, display) {
-  console.log("timer running");
-    var timer = duration, minutes, seconds;
-    function tick() {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            console.log("Time's Up");
-            clearInterval(sInterval);
-            lose();
-        }
-    };
-    sInterval = setInterval(tick, 1000)
-}
-
-function startTimer() {
-    var setDuration = 60 * 1,
-        display = timerEl;
-    myTimer(setDuration, display);
-};
-
 var Game = {
   roundNumber: 0,
   roundRunning: true,
@@ -90,8 +63,8 @@ var Game = {
       Buttons.kill();
       Game.elSubmit.addEventListener("keypress", Game.captureText, true);
       console.log("start clock");
-      startTimer();
       Game.renderMinion();
+      startTimer();
       // delay display
     };
   },
@@ -147,7 +120,7 @@ var Game = {
   winOrLose: function() {
     console.log("winOrLose triggered.");
     Game.results = compare(Game.textA, Game.textB);
-    Game.elResults.innerHTML = Game.results;
+    Game.elResults.innerHTML = "you have: " + Game.results + " errors";
     resultsArray.push(Game.results);
     console.log(resultsArray);
     if (Game.results < 10) {
@@ -159,6 +132,7 @@ var Game = {
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
+      ame.elTextBlock.innerHTML = "You Lose! To many errors, please type the text exactly as you see it here."
       console.log("Round lost")
       lose();
     };
@@ -170,12 +144,45 @@ function lose(){
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
       Game.roundRunning = false;
       Buttons.loser();
-      Game.elResults.innerHTML = "";
+      // Game.elResults.innerHTML = "";
       Game.roundNumber = 0;
       console.log("roundNumber: " + Game.roundNumber);
       resultsArray = [];
       console.log(resultsArray);
 }
+
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log("Time's Up");
+            Game.elTextBlock.innerHTML = "Times Up! You were to slow"
+            clearInterval(sInterval);
+            lose();
+        }
+    };
+    sInterval = setInterval(tick, 1000)
+}
+
+function startTimer() {
+    var difficulty = 10 - Game.roundNumber;
+    var characterCount = Game.textA.length;
+    console.log(difficulty);
+    console.log(characterCount);
+    var setDuration = characterCount * difficulty,
+        display = timerEl;
+    console.log(setDuration);
+    myTimer(setDuration, display);
+};
 
 var Buttons = {
 
