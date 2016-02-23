@@ -179,13 +179,12 @@ function myTimer(duration, display) {
 }
 
 function startTimer() {
-    var difficulty = 10 - Game.roundNumber;
-    var characterCount = Game.textA.length;
-    console.log(difficulty);
-    console.log(characterCount);
-    var setDuration = characterCount * difficulty,
+    var characterCount = Game.textA.length / 1.5;
+    var difficulty = (Game.roundNumber * 1.25 + 10) * .01;
+    var setDuration = characterCount - Math.floor(difficulty * characterCount);
         display = timerEl;
-    console.log(setDuration);
+    console.log("difficulty " + difficulty);
+    console.log("Time " + setDuration);
     myTimer(setDuration, display);
 };
 
