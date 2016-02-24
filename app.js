@@ -125,7 +125,7 @@ var Game = {
   winOrLose: function() {
     console.log("winOrLose triggered.");
     Game.results = compare(Game.textA, Game.textB);
-    Game.elResults.innerHTML = Game.results;
+    Game.elResults.innerHTML = "you have: " + Game.results + " errors";
     resultsArray.push(Game.results);
     console.log(resultsArray);
     if (Game.results < 10) {
@@ -137,6 +137,7 @@ var Game = {
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
+      ame.elTextBlock.innerHTML = "You Lose! To many errors, please type the text exactly as you see it here."
       console.log("Round lost")
       lose();
     };
@@ -148,7 +149,7 @@ function lose(){
       console.log("roundNumber " + Game.roundNumber + " is LOST.")
       Game.roundRunning = false;
       Buttons.loser();
-      Game.elResults.innerHTML = "";
+      // Game.elResults.innerHTML = "";
       Game.roundNumber = 0;
       console.log("roundNumber: " + Game.roundNumber);
       resultsArray = [];
