@@ -36,33 +36,6 @@ var textSource = [
 ];
 var resultsArray = [];
 
-function myTimer(duration, display) {
-  console.log("timer running");
-    var timer = duration, minutes, seconds;
-    function tick() {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            console.log("Time's Up");
-            clearInterval(sInterval);
-            lose();
-        }
-    };
-    sInterval = setInterval(tick, 1000)
-}
-
-function startTimer() {
-    var setDuration = 60 * 1,
-        display = timerEl;
-    myTimer(setDuration, display);
-};
-
 var Game = {
   roundNumber: 0,
   roundRunning: true,
@@ -95,8 +68,8 @@ var Game = {
       Buttons.kill();
       Game.elSubmit.addEventListener("keypress", Game.captureText, true);
       console.log("start clock");
-      startTimer();
       Game.renderMinion();
+      startClock();
       // delay display
     };
   },
@@ -181,6 +154,58 @@ function lose(){
       resultsArray = [];
       console.log(resultsArray);
 }
+
+function startClock(){
+  
+  to1 = function(){
+    setTimeout("timerEl.innerHTML = 'Get Ready'", 1000);
+  };
+  to2 = function(){
+    setTimeout("timerEl.innerHTML = 'Get Set!'", 2000);
+  };
+  to3 = function(){
+    setTimeout("timerEl.innerHTML = 'TYPE!'", 3000);
+  };
+  to4 = function(){
+    setTimeout("startTimer()", 4000);
+  };
+  to1();
+  to2();
+  to3();
+  to4();
+};
+
+function myTimer(duration, display) {
+  console.log("timer running");
+    var timer = duration, minutes, seconds;
+    function tick() {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log("Time's Up");
+            Game.elTextBlock.innerHTML = "Times Up! You were to slow"
+            clearInterval(sInterval);
+            lose();
+        }
+    };
+    sInterval = setInterval(tick, 1000)
+}
+
+function startTimer() {
+    var characterCount = Game.textA.length / 1.5;
+    var difficulty = (Game.roundNumber * 1.25 + 10) * .01;
+    var setDuration = characterCount - Math.floor(difficulty * characterCount);
+        display = timerEl;
+    console.log("difficulty " + difficulty);
+    console.log("Time " + setDuration);
+    myTimer(setDuration, display);
+};
 
 var Buttons = {
 
