@@ -99,9 +99,9 @@ body {
   }
 }
 
-/*zoomIn animation begin. zoomIn shamelessly adapted from animate.css. See animate.css file for credits*/
+/*pop animation begin. pop shamelessly adapted from animate.css zoomIn. See animate.css file for credits*/
 
-.zoomIn {
+.pop {
   pointer-events: none;
   position: fixed;
   animation-name: zoomIn;
@@ -141,7 +141,7 @@ body {
   }
 }
 
-/*begin surfer*/
+/*begin surf*/
 
 .surf {
   pointer-events: none;
