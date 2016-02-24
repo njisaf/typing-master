@@ -99,7 +99,7 @@ var Game = {
       Game.elSubmit.addEventListener("keypress", Game.captureText, true);
       console.log("start clock");
       Minions.renderMinion();
-      startTimer();
+      startClock();
       // delay display
     };
   },
@@ -186,6 +186,26 @@ function lose(){
       resultsArray = [];
       console.log(resultsArray);
 }
+
+function startClock(){
+
+  to1 = function(){
+    setTimeout("timerEl.innerHTML = 'Get Ready'", 1000);
+  };
+  to2 = function(){
+    setTimeout("timerEl.innerHTML = 'Get Set!'", 2000);
+  };
+  to3 = function(){
+    setTimeout("timerEl.innerHTML = 'TYPE!'", 3000);
+  };
+  to4 = function(){
+    setTimeout("startTimer()", 4000);
+  };
+  to1();
+  to2();
+  to3();
+  to4();
+};
 
 function myTimer(duration, display) {
   console.log("timer running");
