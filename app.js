@@ -211,7 +211,7 @@ function myTimer(duration, display) {
 
 function startTimer() {
     var characterCount = Game.textA.length / 1.5;
-    var difficulty = (Game.roundNumber * 1.25 + 10) * .01;
+    var difficulty = (Game.roundNumber * 1.25 + 10) * 0.01;
     var setDuration = characterCount - Math.floor(difficulty * characterCount);
         display = timerEl;
     console.log("difficulty " + difficulty);
