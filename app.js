@@ -8,30 +8,34 @@ var Minions = {
 
   minionArray: [],
 
-  Builder: function(name, image, attBounce, attPop, attSurf) {
+  Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy) {
     this.name = name;
     this.path = "images/" + image;
     this.attBounce = "images/" + attBounce; //fix to jpg when images in place
     this.attPop = "images/" + attPop;
     this.attSurf = "images/" + attSurf;
+    this.attSlow = attSlow;
+    this.attCrazy = attCrazy;
     Minions.minionArray.push(this);
   },
 
   buildMinions: function() {
     var rat = new Minions.Builder("Ratchet Rodent", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "");
-    var ogre = new Minions.Builder("Obsessive Ogre", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "");
     var bunny = new Minions.Builder("Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "");
-    var wizard = new Minions.Builder("Whispering Wizard", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "", "");
-    var spectre = new Minions.Builder("Spangley Spectre", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "", "");
+    var ogre = new Minions.Builder("Obsessive Ogre", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "");
+    var wizard = new Minions.Builder("Whispering Wizard", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "");
+    var spectre = new Minions.Builder("Spangley Spectre", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy");
   },
 
   renderMinion: function() {
     console.log("renderMinion triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
-    // Game.elMinionImg.src = Minions.minionArray[Game.roundNumber].path;
+    Game.elMinionImg.src = Minions.minionArray[Game.roundNumber].path;
     Game.elBounce.data = Minions.minionArray[Game.roundNumber].attBounce;
     Game.elPop.data = Minions.minionArray[Game.roundNumber].attPop;
     Game.elSurf.data = Minions.minionArray[Game.roundNumber].attSurf;
+    Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;
+    Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;
     Game.textA = textSource[Game.roundNumber];
     Game.minionAttack();
     Minions.startAttack();
@@ -227,7 +231,7 @@ function myTimer(duration, display) {
             console.log("Time's Up");
             Game.elTextBlock.innerHTML = "Times Up! You were to slow"
             clearInterval(sInterval);
-            lose();
+            Game.lose();
         }
     };
     sInterval = setInterval(tick, 1000)
