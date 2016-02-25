@@ -1,7 +1,7 @@
 window.onload = function() {
   console.log("window.onload triggered.")
-  Game.gameStarter();
   Minions.buildMinions();
+  Game.gameStarter();
 };
 
 var Minions = {
@@ -10,30 +10,30 @@ var Minions = {
 
   Builder: function(name, image, attBounce, attPop, attSurf) {
     this.name = name;
-    this.path = "images/" + image + ".jpg";
-    this.attBounce = "images/" + attBounce + ".png"; //fix to jpg when images in place
-    this.attPop = "images/" + attPop + ".jpg";
-    this.attSurf = "images/" + attSurf + ".jpg";
+    this.path = "images/" + image;
+    this.attBounce = "images/" + attBounce; //fix to jpg when images in place
+    this.attPop = "images/" + attPop;
+    this.attSurf = "images/" + attSurf;
     Minions.minionArray.push(this);
   },
 
   buildMinions: function() {
-    var ogre = new Minions.Builder("Obsessive Ogre", "ogre", "ogre_club", "shrek", "rubberduck");
-    var rat = new Minions.Builder("Ratchet Rodent");
-    var wizard = new Minions.Builder("Wispering Wizard");
-    var bunny = new Minions.Builder("Bizarre Bunny");
-    var spectre = new Minions.Builder("Spangley Spectre");
+    var rat = new Minions.Builder("Ratchet Rodent", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "");
+    var ogre = new Minions.Builder("Obsessive Ogre", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "");
+    var bunny = new Minions.Builder("Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "");
+    var wizard = new Minions.Builder("Whispering Wizard", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "", "");
+    var spectre = new Minions.Builder("Spangley Spectre", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "", "");
   },
 
   renderMinion: function() {
     console.log("renderMinion triggered.")
     Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
-    Game.elMinionImg.src = Minions.minionArray[Game.roundNumber].path;
-    Game.elBounce.src = Minions.minionArray[Game.roundNumber].attBounce;
-    Game.elPop.src = Minions.minionArray[Game.roundNumber].attPop;
-    Game.elSurf.src = Minions.minionArray[Game.roundNumber].attSurf;
-    // Game.minionAttack();
+    // Game.elMinionImg.src = Minions.minionArray[Game.roundNumber].path;
+    Game.elBounce.data = Minions.minionArray[Game.roundNumber].attBounce;
+    Game.elPop.data = Minions.minionArray[Game.roundNumber].attPop;
+    Game.elSurf.data = Minions.minionArray[Game.roundNumber].attSurf;
     Game.textA = textSource[Game.roundNumber];
+    Game.minionAttack();
     Minions.startAttack();
     console.log("textA is now: " + Game.textA);
   },
@@ -122,21 +122,22 @@ var Game = {
   //   console.log("renderMinion triggered.")
   //   Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
   //   Game.elMinion.innerHTML = Minions.minionArray[Game.roundNumber].name;
-  //   Game.minionAttack();
+    // Game.minionAttack();
   //   Game.textA = textSource[Game.roundNumber];
   //   console.log("textA is now: " + Game.textA);
   // },
 
-  // minionAttack: function() {
-  //   if (Game.roundRunning = true) {
-  //     atkInterval = setInterval(Game.attackDetect, Minions.minionArray[Game.roundNumber].speed);
-  //   } else if (Game.roundRunning = false) {
-  //     Game.elBody.className = "background_white";
-  //   } else {
-  //     console.log("minionAttack is broken");
-  //   }
-  //
-  // },
+  minionAttack: function() {
+    if (Game.roundRunning = true) {
+      atkInterval = setInterval(Game.attackDetect, Minions.minionArray[Game.roundNumber].speed);
+    } else if (Game.roundRunning = false) {
+      console.log("Game is not running")
+      // Game.elBody.className = "background_white";
+    } else {
+      console.log("minionAttack is broken");
+    }
+
+  },
 
   // attackDetect: function() {
   //   if (Game.elBody.classList.contains("background_white")) {
@@ -156,36 +157,39 @@ var Game = {
   winOrLose: function() {
     console.log("winOrLose triggered.");
     Game.results = compare(Game.textA, Game.textB);
-    Game.elResults.innerHTML = "you have: " + Game.results + " errors";
+    Game.elResults.innerHTML = "You have: " + Game.results + " errors.";
     resultsArray.push(Game.results);
     console.log(resultsArray);
     if (Game.results < 10) {
       // Game.elSubmit.removeEventListener("keypress");
-      Game.elTextBlock.innerHTML = "YOU WIN! Click the button to start the next round."
-      console.log("roundNumber " + Game.roundNumber + " is WON.")
+      Game.elTextBlock.innerHTML = "YOU WIN! Click the button to start the next round.";
+      console.log("roundNumber " + Game.roundNumber + " is WON.");
       Game.roundNumber += 1;
       console.log("roundNumber: " + Game.roundNumber);
       Game.roundRunning = false;
       Buttons.nextround();
     } else if (Game.results >= 10) {
-      ame.elTextBlock.innerHTML = "You Lose! To many errors, please type the text exactly as you see it here."
-      console.log("Round lost")
-      lose();
+      Game.elTextBlock.innerHTML = "You Lose! Too many errors, please type the text exactly as you see it here.";
+      console.log("Round lost.");
+      Game.lose();
+    } else {
+      console.log("WHY BROKEN?");
     };
   },
-}
 
-function lose(){
-      // Game.elSubmit.removeEventListener("keypress");
-      console.log("roundNumber " + Game.roundNumber + " is LOST.")
-      Game.roundRunning = false;
-      Buttons.loser();
-      // Game.elResults.innerHTML = "";
-      Game.roundNumber = 0;
-      console.log("roundNumber: " + Game.roundNumber);
-      resultsArray = [];
-      console.log(resultsArray);
-}
+  lose: function() {
+    // Game.elSubmit.removeEventListener("keypress");
+    console.log("roundNumber " + Game.roundNumber + " is LOST.")
+    Game.roundRunning = false;
+    Buttons.loser();
+    // Game.elResults.innerHTML = "";
+    Game.roundNumber = 0;
+    console.log("roundNumber: " + Game.roundNumber);
+    resultsArray = [];
+    console.log(resultsArray);
+  },
+};
+
 
 function startClock(){
 
