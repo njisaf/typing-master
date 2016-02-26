@@ -16,6 +16,7 @@ var Minions = {
     this.attSurf = "images/" + attSurf;
     this.attSlow = attSlow;
     this.attCrazy = attCrazy;
+    this.talk = ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!"]
     Minions.minionArray.push(this);
   },
 
@@ -43,9 +44,29 @@ var Minions = {
   },
 
   startAttack: function() {
-    Game.elBounce.hidden = false;
-    Game.elPop.hidden = false;
-    Game.elSurf.hidden = false;
+    st1 = function(){
+    setTimeout("Game.elBounce.hidden = false;", 10000);
+    setTimeout("console.log(Minions.minionArray[Game.roundNumber].talk[0])", 10000);
+    };
+    st2 = function(){
+      setTimeout("Game.elPop.hidden = false;", 15000);
+      setTimeout("console.log(Minions.minionArray[Game.roundNumber].talk[1])", 15000);
+    };
+    st3 = function(){
+      setTimeout("Game.elSurf.hidden = false;", 20000);
+      setTimeout("console.log(Minions.minionArray[Game.roundNumber].talk[2])", 20000);
+    };
+    st4 = function(){
+      setTimeout("console.log(Minions.minionArray[Game.roundNumber].talk[3])", 25000);
+    }
+    st5 = function(){
+      setTimeout("console.log(Minions.minionArray[Game.roundNumber].talk[4])", 30000);
+    }
+    st1();
+    st2();
+    st3();
+    st4();
+    st5();
   },
 
   endAttack: function() {
@@ -192,6 +213,7 @@ var Game = {
     console.log("roundNumber: " + Game.roundNumber);
     resultsArray = [];
     console.log(resultsArray);
+    endAttack();
   },
 };
 
