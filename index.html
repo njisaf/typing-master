@@ -2,10 +2,46 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="animate.css"> -->
+    <link href='https://fonts.googleapis.com/css?family=Fontdiner+Swanky' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-    <!-- <script src="./Vendors/Rita/rita-full.js"></script> -->
+    <title>Juicy Typing Master!</title>
+  </head>
+  <body class="container stage">
+    <object class="pop" id="popAttack" data="" hidden></object>
+    <object class="surf" id="surfAttack" data="" hidden></object>
+
+    <section class="container" id="upperElements">
+      <img class="" id="minionHolder" src="images/ogre.jpg">
+      <section id="minionBubble">
+        <img id="speechBubble" src="images/speechbubble.png">
+        <p class="" id="minionSpeech">I am a minion!</p>
+      </section>
+    </section>
+
+    <section class="container" id="lowerElements">
+      <p class="" id="textBlock">Text here</p>
+      <p id="timer"></p>
+      <input type="text" size="100" autocomplete="off" id="formText">
+      <p id="buttonHolder"></p>
+      <p id="formResults"></p>
+    </section>
+    <div id="traveler">
+      <div id="bouncer"><object id="bounceAttack" data="" hidden></object></div>
+    </div>
+    <script src="text.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <title>Juicy Typing Master</title>
   </head>
   <body class="stage" id="mainBody">
@@ -37,4 +73,4 @@
     <script src="text.js"></script>
     <script src="app.js"></script>
   </body>
-</html>
+</html> -->

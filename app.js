@@ -11,7 +11,7 @@ var Minions = {
   Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy) {
     this.name = name;
     this.path = "images/" + image;
-    this.attBounce = "images/" + attBounce; //fix to jpg when images in place
+    this.attBounce = "images/" + attBounce;
     this.attPop = "images/" + attPop;
     this.attSurf = "images/" + attSurf;
     this.attSlow = attSlow;

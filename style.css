@@ -7,15 +7,6 @@ body {
   border: 1px dashed #666;
 }
 
-.textBox {
-  flex-direction: column-reverse;
-  align-content: center;
-  position: relative;
-  /*display: block;*/
-  /*top: 0px;*/
-  /*left: 0px;*/
-}
-
 .stage {
   position: absolute;
   margin: auto;
@@ -24,7 +15,54 @@ body {
   height: 660px;
   border: 2px solid #666;
   background: white;
+  flex-direction: column;
+  justify-content: center;
 }
+
+#upperElements {
+  border: 1px solid blue;
+  flex-direction: row;
+  height: 250px;
+  width: 660px;
+}
+
+#lowerElements {
+  border: 1px solid red;
+  flex-direction: column;
+  justify-content: center;
+  height: 410px;
+  width: 660px;
+}
+
+#minionHolder {
+  height: 250px;
+  width: 250px;
+}
+
+#minionBubble {
+  border: 1px solid yellow;
+  height: 250px;
+  width: 360px;
+  display: inline-flex;
+}
+
+#speechBubble {
+  position: absolute;
+  height: 250px;
+  width: 360px;
+}
+
+#minionSpeech {
+  position: relative;
+}
+
+
+/*.textBox {
+  flex-direction: column-reverse;
+  align-content: center;
+  position: relative;
+}*/
+
 
 #formText {
   word-wrap: break-word;
