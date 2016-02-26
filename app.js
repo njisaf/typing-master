@@ -86,10 +86,10 @@ var Game = {
   elButton: document.getElementById("buttonHolder"),
   elBody: document.getElementById("mainBody"),
 
-  gameStarter: function() {
+    gameStarter: function() {
     Buttons.begin();
     Game.elTextBlock.innerHTML = "Get to ready to start! Click the button to start.";
-    // Game.elMinionImg.innerHTML = "Minion Hole";
+    Game.elSubmit.disabled = true;
   },
 
   gamePlayer: function(e) {
@@ -104,7 +104,7 @@ var Game = {
       console.log("start clock");
       Minions.renderMinion();
       startClock();
-      // delay display
+      console.log("start clock");
     };
   },
 
@@ -172,6 +172,7 @@ var Game = {
       console.log("roundNumber: " + Game.roundNumber);
       Game.roundRunning = false;
       Buttons.nextround();
+      // Game.elSubmit.disabled = true;
     } else if (Game.results >= 10) {
       Game.elTextBlock.innerHTML = "You Lose! Too many errors, please type the text exactly as you see it here.";
       console.log("Round lost.");
@@ -194,11 +195,10 @@ var Game = {
   },
 };
 
-
 function startClock(){
 
   to1 = function(){
-    setTimeout("timerEl.innerHTML = 'Get Ready'", 1000);
+    setTimeout("timerEl.innerHTML = 'Get Ready'", 250);
   };
   to2 = function(){
     setTimeout("timerEl.innerHTML = 'Get Set!'", 2000);
@@ -238,13 +238,15 @@ function myTimer(duration, display) {
 }
 
 function startTimer() {
-    var characterCount = Game.textA.length / 1.5;
-    var difficulty = (Game.roundNumber * 1.25 + 10) * 0.01;
-    var setDuration = characterCount - Math.floor(difficulty * characterCount);
-        display = timerEl;
-    console.log("difficulty " + difficulty);
-    console.log("Time " + setDuration);
-    myTimer(setDuration, display);
+  Game.elSubmit.disabled = false;
+  Game.elSubmit.focus();
+  var characterCount = Game.textA.length / 1.5;
+  var difficulty = (Game.roundNumber * 1.25 + 10) * .01;
+  var setDuration = characterCount - Math.floor(difficulty * characterCount);
+      display = timerEl;
+  console.log("difficulty " + difficulty);
+  console.log("Time " + setDuration);
+  myTimer(setDuration, display);
 };
 
 var Buttons = {
