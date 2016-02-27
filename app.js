@@ -30,12 +30,12 @@ var Minions = {
   },
 
   buildMinions: function() {
-    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
-    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
     var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""]);
-    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
-    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
-    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
+    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "murder.jpeg", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
+    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "boulder.png", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
+    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
+    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
+    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
   },
 
   renderMinion: function() {
