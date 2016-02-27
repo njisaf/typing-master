@@ -29,10 +29,11 @@ var Minions = {
   },
 
   buildMinions: function() {
-    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", ["Take This!", "", "", "", "", ""]);
-    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
-    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
-    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "Witches_Broom_icon.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
+    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
+    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""]);
+    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
+    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
+    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
     var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
   },
 
@@ -50,7 +51,13 @@ var Minions = {
   },
 
   startAttack: function() {
-    Game.elSurf.hidden = true;
+    var setTimeout1;
+    var setTimeout2;
+    var setTimeout3;
+    var setTimeout4;
+    var setTimeout5;
+    var setTimeout6;
+
     minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].name;
     st0 = function(){
       setTime1 = setTimeout("minionSpeech.innerHTML = ''", 5000);
@@ -112,7 +119,8 @@ var textSource = [
   "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
   "Through sea-sized eyes that are crusted with rheum and asteroid dust He stares fixedly at the Destination.",
   "In a brain bigger than a city, with geological slowness, He thinks only of the Weight.",
-  "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants."
+  "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants.",
+  "An alternative, favoured by those of a religious persuasion, was that A'Tuin was crawling from the Birthplace to the Time of Mating, as were all the stars in the sky which were, obviously, also carried by giant turtles."
 ];
 var resultsArray = [];
 
