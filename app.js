@@ -21,12 +21,12 @@ var Minions = {
   },
 
   buildMinions: function() {
-    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
+    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "");
     var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "");
     var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", "");
-    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "");
     var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "");
     var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy");
+    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
   },
 
   renderMinion: function() {
