@@ -4,11 +4,19 @@ window.onload = function() {
   Game.gameStarter();
 };
 
+var setTime1;
+var setTime2;
+var setTime3;
+var setTime4;
+var setTime5;
+var setTime6;
+var setTime7;
+
 var Minions = {
 
   minionArray: [],
 
-  Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy) {
+  Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy, talk) {
     this.name = name;
     this.path = "images/" + image;
     this.attBounce = "images/" + attBounce;
@@ -16,17 +24,17 @@ var Minions = {
     this.attSurf = "images/" + attSurf;
     this.attSlow = attSlow;
     this.attCrazy = attCrazy;
-    this.talk = ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!"]
+    this.talk = talk;
     Minions.minionArray.push(this);
   },
 
   buildMinions: function() {
     var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow");
-    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "");
-    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", "");
-    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "");
-    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "");
-    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy");
+    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""]);
+    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "blank.png", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
+    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "rubberduck.jpg", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
+    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "blank.png", "blank.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
+    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "surf_attack.png", "blank.png", "blank.png", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
   },
 
   renderMinion: function() {
@@ -36,8 +44,6 @@ var Minions = {
     Game.elBounce.data = Minions.minionArray[Game.roundNumber].attBounce;
     Game.elPop.data = Minions.minionArray[Game.roundNumber].attPop;
     Game.elSurf.data = Minions.minionArray[Game.roundNumber].attSurf;
-    Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;
-    Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;
     Game.textA = textSource[Game.roundNumber];
     Game.minionAttack();
     Minions.startAttack();
@@ -54,38 +60,54 @@ var Minions = {
 
     minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].name;
     st0 = function(){
-      setTimeout1 = setTimeout("minionSpeech.innerHTML = ''", 5000);
+      setTime1 = setTimeout("minionSpeech.innerHTML = ''", 5000);
     }
     st1 = function(){
-      setTimeout("Game.elBounce.hidden = false;", 10000);
-      setTimeout2 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[0]", 9500);
+      
+      setTime2 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[0]", 9500), setTimeout("Game.elBounce.hidden = false;", 10000);
     };
     st2 = function(){
-      setTimeout("Game.elPop.hidden = false;", 15000);
-      setTimeout3 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[1]", 14500);
+      setTime3 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[1]", 14500), setTimeout("Game.elPop.hidden = false;", 15000);
     };
     st3 = function(){
       setTimeout("Game.elSurf.hidden = false;", 20000);
-      setTimeout4 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[2]", 19500);
+      setTime4 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[2]", 19500);
     };
     st4 = function(){
-      setTimeout5 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[3]", 24500);
-    }
+      setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;", 25000);
+      setTime5 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[3]", 24500);
+    };
     st5 = function(){
-      setTimeout6 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[4]", 29500);
-    }
+      setTimeout("Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;", 30000);
+      setTime6 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[4]", 29500);
+    };
+    st6 = function(){
+      setTime7 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[5]", 34500);
+    };
     st0();
     st1();
     st2();
     st3();
     st4();
     st5();
+    st6();
   },
 
   endAttack: function() {
     Game.elBounce.hidden = true;
     Game.elPop.hidden = true;
     Game.elSurf.hidden = true;
+    Game.elTextBlock.className = null;
+    Game.elTextBlock.className = null;
+    window.clearTimeout(setTime1);
+    window.clearTimeout(setTime2);
+    window.clearTimeout(setTime3);
+    window.clearTimeout(setTime4);
+    window.clearTimeout(setTime5);
+    window.clearTimeout(setTime6);
+    window.clearTimeout(setTime7);
+    console.log("endAttack called")
+    minionSpeech.innerHTML = "";
   },
 
 };
@@ -227,7 +249,7 @@ var Game = {
     console.log("roundNumber: " + Game.roundNumber);
     resultsArray = [];
     console.log(resultsArray);
-    endAttack();
+    Minions.endAttack();
   },
 };
 
