@@ -198,6 +198,8 @@ body {
   animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-direction: normal;
+  height: 250px;
+  width: 250px;
 }
 
 @keyframes surfer {
