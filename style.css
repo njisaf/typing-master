@@ -71,6 +71,25 @@ body {
   /*user-select: none;     */
 }
 
+#buttonActual {
+  background-color: white;
+  border-style: inset;
+  border-color: black;
+  border-width: medium;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#timer {
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #formText {
   word-wrap: break-word;
   word-break: break-word;
@@ -125,7 +144,7 @@ body {
 }
 
 @keyframes travel {
-  from { left: 20px; } to { left: 960px; }
+  from { left: 15px; } to { left: 960px; }
 }
 
 @keyframes bounce {
