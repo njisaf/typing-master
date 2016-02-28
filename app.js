@@ -6,7 +6,7 @@ window.onload = function() {
 
 var TextBuilder = {
   sentences: 1,
-  limit: 100,
+  limit: 75,
   stringArray: [],
   sentenceArray: [],
   startIndex: 0,
@@ -138,19 +138,19 @@ var Minions = {
       setTime3 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[1]", 14500), setTimeout("Game.elPop.hidden = false;", 15000);
     };
     st3 = function(){
-      // setTime4 = 
+      // setTime4 =
       setTime5 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[2]", 19500), setTimeout("Game.elSurf.hidden = false;", 20000);
     };
     st4 = function(){
-      // setTime6 = 
+      // setTime6 =
       setTime7 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[3]", 24500), setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;", 25000);
     };
     st5 = function(){
-      // setTime8 = 
+      // setTime8 =
       setTime9 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[4]", 29500), setTimeout("Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;", 30000);
     };
     st6 = function(){
-      // setTime10 = 
+      // setTime10 =
       setTime11 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[5]", 34500), setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attRainbow;", 35000);
     };
     st0();
@@ -163,11 +163,6 @@ var Minions = {
   },
 
   endAttack: function() {
-    Game.elBounce.hidden = true;
-    Game.elPop.hidden = true;
-    Game.elSurf.hidden = true;
-    Game.elTextBlock.className = null;
-    Game.elMinionImg.className = null;
     window.clearTimeout(setTime1);
     window.clearTimeout(setTime2);
     window.clearTimeout(setTime3);
@@ -179,6 +174,11 @@ var Minions = {
     window.clearTimeout(setTime9);
     window.clearTimeout(setTime10);
     window.clearTimeout(setTime11);
+    Game.elBounce.hidden = true;
+    Game.elPop.hidden = true;
+    Game.elSurf.hidden = true;
+    Game.elTextBlock.className = null;
+    Game.elMinionImg.className = null;
     console.log("endAttack called")
     minionSpeech.innerHTML = "";
   },
@@ -262,9 +262,11 @@ var Game = {
     console.log(resultsArray);
     if(Game.results < 10 && Game.roundNumber === 5){
       Game.elTextBlock.innerHTML = "You have Defeated the TYPING MASTER! Congratulations!";
+      minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].defeat;
       Buttons.reset();
     } else if (Game.results < 10) {
       Game.elTextBlock.innerHTML = "YOU WIN! Click the button to start the next round.";
+      minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].defeat;
       console.log("roundNumber " + Game.roundNumber + " is WON.");
       Game.roundNumber += 1;
       console.log("roundNumber: " + Game.roundNumber);
@@ -338,7 +340,7 @@ var Timer = {
 
       if (--timer < 0) {
         console.log("Time's Up");
-        Game.elTextBlock.innerHTML = "Times Up! You were to slow"
+        Game.elTextBlock.innerHTML = "Times Up! You were too slow!"
         clearInterval(sInterval);
         Game.lose();
       }
