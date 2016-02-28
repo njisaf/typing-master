@@ -88,7 +88,7 @@ var Minions = {
 
   minionArray: [],
 
-  Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy, attRainbow, talk) {
+  Builder: function(name, image, attBounce, attPop, attSurf, attSlow, attCrazy, attRainbow, talk, defeat) {
     this.name = name;
     this.path = "images/" + image;
     this.attBounce = "images/" + attBounce;
@@ -98,16 +98,17 @@ var Minions = {
     this.attCrazy = attCrazy;
     this.attRainbow = attRainbow;
     this.talk = talk;
+    this.defeat = defeat;
     Minions.minionArray.push(this);
   },
 
   buildMinions: function() {
-    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""]);
-    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "murder.jpeg", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
-    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "boulder.png", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
-    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
-    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", "", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
-    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow", ["None can defeat my Typing skills!", "Distracted yet?", "Have at THEE!", "Gotcha Now!", "HAHA!", "This will Get you for sure!"]);
+    var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""], "Rats! I am overcome!");
+    var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "murder.jpeg", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""], "You beat me! I'm hopping mad!");
+    var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "boulder.png", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""], "Father! I have failed you. Faaaaather!");
+    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""], "Curses! Foiled by a brat!");
+    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""], "That's not very fabulous of you.");
+    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow", ["None can defeat my Typing skills!", "Distracted yet?", "Have at THEE!", "Gotcha Now!", "HAHA!", "This will Get you for sure!"], "How can this be?? The Typing Master... defeated!");
   },
 
   renderMinion: function() {
@@ -117,7 +118,6 @@ var Minions = {
     Game.elBounce.data = Minions.minionArray[Game.roundNumber].attBounce;
     Game.elPop.data = Minions.minionArray[Game.roundNumber].attPop;
     Game.elSurf.data = Minions.minionArray[Game.roundNumber].attSurf;
-    // Game.textA = textSource[Game.roundNumber];
     Game.minionAttack();
     Minions.startAttack();
     console.log("textA is now: " + Game.textA);
