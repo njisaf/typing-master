@@ -1,14 +1,13 @@
 window.onload = function() {
   console.log("window.onload triggered.")
   Minions.buildMinions();
-  TextBuilder.runThis();
   Game.gameStarter();
 };
 
 var TextBuilder = {
 
   // sentences is the number of full sentences (period to period) will be returned.
-  sentences: 2,
+  sentences: 1,
   // limit is the minimum length the final text string (Game.textA) must be.
   limit: 100,
   stringArray: [],
@@ -256,6 +255,7 @@ var Game = {
 
   gamePlayer: function(e) {
     Game.roundRunning = true;
+    TextBuilder.runThis();
     if (Game.roundNumber === textSource.length) {
       Buttons.again();
       Game.elResults.innerHTML = "";
