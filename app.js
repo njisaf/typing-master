@@ -108,7 +108,7 @@ var Minions = {
     var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "boulder.png", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""], "Father! I have failed you. Faaaaather!");
     var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", "shake-slow", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""], "Curses! Foiled by a brat!");
     var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", "shake-slow", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""], "That's not very fabulous of you.");
-    var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow", ["None can defeat my Typing skills!", "Distracted yet?", "Have at THEE!", "Gotcha Now!", "HAHA!", "This will Get you for sure!"], "How can this be?? The Typing Master... defeated!");
+    var typing = new Minions.Builder("You can't defeat me-ow, the Typing Master! Prepare to be... DELETED!", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow", ["None can defeat my Typing skills!", "Distracted yet?", "Have at THEE!", "Gotcha Now!", "HAHA!", "This will Get you for sure!"], "How can this be?? The Typing Master... defeated! Me-OOOOOOWWW!");
   },
 
   renderMinion: function() {
