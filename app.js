@@ -1,7 +1,6 @@
 window.onload = function() {
   console.log("window.onload triggered.")
   Minions.buildMinions();
-  TextBuilder.runThis();
   Game.gameStarter();
 };
 
@@ -256,6 +255,7 @@ var Game = {
 
   gamePlayer: function(e) {
     Game.roundRunning = true;
+    TextBuilder.runThis();
     if (Game.roundNumber === textSource.length) {
       Buttons.again();
       Game.elResults.innerHTML = "";
