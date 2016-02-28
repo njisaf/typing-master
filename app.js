@@ -1,8 +1,109 @@
 window.onload = function() {
   console.log("window.onload triggered.")
   Minions.buildMinions();
+  TextBuilder.runThis();
   Game.gameStarter();
 };
+
+var TextBuilder = {
+
+  // sentences is the number of full sentences (period to period) will be returned.
+  sentences: 2,
+  // limit is the minimum length the final text string (Game.textA) must be.
+  limit: 100,
+  stringArray: [],
+  sentenceArray: [],
+  startIndex: 0,
+  endIndex: 0,
+
+  runThis: function() {
+    TextBuilder.splitter();
+    TextBuilder.findStartEnd();
+    console.log("startIndex is: " + TextBuilder.startIndex);
+    console.log("endIndex is: " + TextBuilder.endIndex);
+    TextBuilder.buildSentences();
+    console.log("textA is now: " + Game.textA);
+  },
+
+  getRandom: function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  },
+
+  splitter: function() {
+    // var findTextSrc = minionArray[Game.roundNumber].textsrc;
+    var re = /\./g;
+    // console.log();
+    var loadTextSrc = textSource.replace(re, " .");
+    console.log("loadTextSrc: " + loadTextSrc);
+    TextBuilder.stringArray = loadTextSrc.split(" ");
+    console.log("stringArray: " + TextBuilder.stringArray);
+
+    // if (findTextSrc === "discworld") {
+    //   var loadTextSrc = TextSource.discworld.replace(re, " .");
+    //   console.log(loadTextSrc);
+    //   TextBuilder.stringArray = loadTextSrc.split(" ");
+    //   console.log("discworld loaded into stringArray");
+    // } else if (findTextSrc === "storm") {
+    //   var loadTextSrc = TextSource.storm.replace(re, " .");
+    //   console.log(loadTextSrc);
+    //   TextBuilder.stringArray = loadTextSrc.split(" ");
+    //   console.log("storm loaded into stringArray");
+    // } else {
+    //   console.log("TextBuilder splitter is broken.")
+    // };
+  },
+
+  findStartEnd: function() {
+    var indices = [];
+    var element = ".";
+    var index = TextBuilder.stringArray.indexOf(element);
+      while (index != -1) {
+        indices.push(index);
+        index = TextBuilder.stringArray.indexOf(element, index + 1);
+      };
+    console.log("Indices found: " + indices);
+    var indicesRandom = indices[TextBuilder.getRandom(0, indices.length)];
+    var indicesRandomIndex = indices.indexOf(indicesRandom);
+    console.log("indicesRandomIndex: " + indicesRandomIndex);
+    var indicesEnd = indicesRandomIndex + (TextBuilder.sentences);
+    console.log("indicesEnd: " + indicesEnd);
+    TextBuilder.startIndex = indicesRandom;
+    TextBuilder.endIndex = indices[indicesEnd];
+  },
+
+  buildSentences: function() {
+    var re = /\./g;
+    TextBuilder.sentenceArray = TextBuilder.stringArray.slice(TextBuilder.startIndex, TextBuilder.endIndex);
+    console.log("sentenceArray: " + TextBuilder.sentenceArray);
+    TextBuilder.sentenceArray.shift();
+    console.log("sentenceArray Clean1: " + TextBuilder.sentenceArray);
+    if (TextBuilder.sentenceArray[0] === ".") {
+      TextBuilder.sentenceArray.shift();
+      console.log("sentenceArray Clean2: " + TextBuilder.sentenceArray);
+      TextBuilder.cleanSentences();
+    } else {
+      TextBuilder.cleanSentences();
+    };
+  },
+
+    cleanSentences: function() {
+      var textDirty = TextBuilder.sentenceArray.join(" ") + ".";
+      console.log("textDirty: " + textDirty);
+      var textLast = textDirty.replace(" .", ".");
+      console.log("textLast: " + textLast);
+      if (textLast === "\.") {
+        console.log("text at start. Reset needed.");
+        TextBuilder.runThis();
+      } else if (textLast.length < TextBuilder.limit) {
+        console.log("text too short. Reset needed");
+        TextBuilder.runThis();
+      } else {
+        Game.textA = textLast;
+        console.log(Game.textA.length);
+      };
+    },
+};
+
 
 var setTime1;
 var setTime2;
@@ -44,12 +145,12 @@ var Minions = {
 
   renderMinion: function() {
     console.log("renderMinion triggered.")
-    Game.elTextBlock.innerHTML = textSource[Game.roundNumber];
+    Game.elTextBlock.innerHTML = Game.textA;
     Game.elMinionImg.src = Minions.minionArray[Game.roundNumber].path;
     Game.elBounce.data = Minions.minionArray[Game.roundNumber].attBounce;
     Game.elPop.data = Minions.minionArray[Game.roundNumber].attPop;
     Game.elSurf.data = Minions.minionArray[Game.roundNumber].attSurf;
-    Game.textA = textSource[Game.roundNumber];
+    // Game.textA = textSource[Game.roundNumber];
     Game.minionAttack();
     Minions.startAttack();
     console.log("textA is now: " + Game.textA);
@@ -118,14 +219,14 @@ var Minions = {
 
 var timerEl = document.getElementById("timer");
 
-var textSource = [
-  "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
-  "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
-  "Through sea-sized eyes that are crusted with rheum and asteroid dust He stares fixedly at the Destination.",
-  "In a brain bigger than a city, with geological slowness, He thinks only of the Weight.",
-  "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants.",
-  "An alternative, favoured by those of a religious persuasion, was that A'Tuin was crawling from the Birthplace to the Time of Mating, as were all the stars in the sky which were, obviously, also carried by giant turtles."
-];
+// var textSource = [
+//   "In a distant and second-hand set of dimensions, in an astral plane that was never meant to fly, the curling star-mists waver and part.",
+//   "Great A'Tuin the turtle comes, swimming slowly through the interstellar gulf, hydrogen frost on his ponderous limbs, his huge and ancient shell pocked with meteor craters.",
+//   "Through sea-sized eyes that are crusted with rheum and asteroid dust He stares fixedly at the Destination.",
+//   "In a brain bigger than a city, with geological slowness, He thinks only of the Weight.",
+//   "Most of the weight is of course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen, the four giant elephants.",
+//   "An alternative, favoured by those of a religious persuasion, was that A'Tuin was crawling from the Birthplace to the Time of Mating, as were all the stars in the sky which were, obviously, also carried by giant turtles."
+// ];
 var resultsArray = [];
 
 var Game = {
