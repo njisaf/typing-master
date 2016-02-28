@@ -137,8 +137,8 @@ var Minions = {
     var rat = new Minions.Builder("I'm the Well-Read Rodent. You ready?", "rat.jpg", "rat_attack.png", "blank.png", "blank.png", "", "", "", ["Take This!", "", "", "", "", ""]);
     var bunny = new Minions.Builder("Hi. I'm a Bizarre Bunny", "bunny.jpg", "carrot_attack.png", "murder.jpeg", "blank.png", "", "", "", ["Look at THAT!", "Getting distracted yet?", "", "", "", ""]);
     var ogre = new Minions.Builder("Obsessive Ogre will crush you!", "ogre.jpg", "ogre_club.png", "shrek.jpg", "boulder.png", "", "", "", ["Ogre SMASH!", "Confuse Attack?!", "How about this one!", "", "", ""]);
-    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
-    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
+    var wizard = new Minions.Builder("Whispering Wizard here, get ready for a challenge", "wizard.jpg", "wizard_attack.png", "sparkle.png", "broom.png", "shake-slow", "", "", ["Take This!", "OOo Pretty!", "Fly my Broom, FLY!", "HAHA!", "", ""]);
+    var spectre = new Minions.Builder("OOOooooO I the Spangley Spectre will be your greatest test!", "spectre.jpg", "ghostbuster.png", "pepe.jpg", "halloween.jpg", "shake-slow", "shake-crazy", "", ["Take This!", "Getting distracted yet?", "How about this one!", "HAHA!", "Gotcha Now!", ""]);
     var typing = new Minions.Builder("I am the typing master. Meow.", "typingmaster.jpg", "grumpy.jpg", "gorilla.jpg", "three-cat.jpg", "shake-slow", "shake-crazy", "rainbow", ["None can defeat my Typing skills!", "Distracted yet?", "Have at THEE!", "Gotcha Now!", "HAHA!", "This will Get you for sure!"]);
   },
 
@@ -169,20 +169,20 @@ var Minions = {
       setTime3 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[1]", 14500), setTimeout("Game.elPop.hidden = false;", 15000);
     };
     st3 = function(){
-      setTime4 = setTimeout("Game.elSurf.hidden = false;", 20000);
-      setTime5 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[2]", 19500);
+      // setTime4 = 
+      setTime5 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[2]", 19500), setTimeout("Game.elSurf.hidden = false;", 20000);
     };
     st4 = function(){
-      setTime6 = setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;", 25000);
-      setTime7 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[3]", 24500);
+      // setTime6 = 
+      setTime7 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[3]", 24500), setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attSlow;", 25000);
     };
     st5 = function(){
-      setTime8 = setTimeout("Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;", 30000);
-      setTime9 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[4]", 29500);
+      // setTime8 = 
+      setTime9 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[4]", 29500), setTimeout("Game.elMinionImg.className = Minions.minionArray[Game.roundNumber].attCrazy;", 30000);
     };
     st6 = function(){
-      setTime10 = setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attRainbow;", 35000);
-      setTime11 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[5]", 34500);
+      // setTime10 = 
+      setTime11 = setTimeout("minionSpeech.innerHTML = Minions.minionArray[Game.roundNumber].talk[5]", 34500), setTimeout("Game.elTextBlock.className = Minions.minionArray[Game.roundNumber].attRainbow;", 35000);
     };
     st0();
     st1();
