@@ -204,7 +204,7 @@ var Game = {
   elSurf: document.getElementById("surfAttack"),
   elButton: document.getElementById("buttonHolder"),
   elBody: document.getElementById("mainBody"),
-  elTimer = document.getElementById("timer");
+  elTimer: document.getElementById("timer"),
 
   gameStarter: function() {
     Buttons.begin();
@@ -224,7 +224,7 @@ var Game = {
       Game.elSubmit.addEventListener("keypress", Game.captureText, true);
       console.log("start clock");
       Minions.renderMinion();
-      startClock();
+      Timer.startClock();
       console.log("start clock");
     };
   },
@@ -312,7 +312,7 @@ var Timer = {
       setTimeout("Game.elTimer.innerHTML = 'TYPE!'", 3000);
     };
     to4 = function(){
-      setTimeout("startTimer()", 4000);
+      setTimeout("Timer.startTimer()", 4000);
     };
     to1();
     to2();
@@ -351,7 +351,7 @@ var Timer = {
     display = Game.elTimer;
     console.log("difficulty " + difficulty);
     console.log("Time " + setDuration);
-    myTimer(setDuration, display);
+    Timer.myTimer(setDuration, display);
   },
 };
 
