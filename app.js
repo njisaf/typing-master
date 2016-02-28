@@ -259,7 +259,10 @@ var Game = {
     Game.elResults.innerHTML = "You have: " + Game.results + " errors.";
     resultsArray.push(Game.results);
     console.log(resultsArray);
-    if (Game.results < 10) {
+    if(Game.results < 10 && Game.roundNumber === 5){
+      Game.elTextBlock.innerHTML = "You have Defeated the TYPING MASTER! Congratulations!";
+      Buttons.reset();
+    } else if (Game.results < 10) {
       Game.elTextBlock.innerHTML = "YOU WIN! Click the button to start the next round.";
       console.log("roundNumber " + Game.roundNumber + " is WON.");
       Game.roundNumber += 1;
@@ -372,6 +375,9 @@ var Buttons = {
   },
   kill: function() {
     Game.elButton.innerHTML = "";
+  },
+  reset: function() {
+    Game.elButton.innerHTML = "<button id=\"buttonActual\" onclick=\"Game.gameStarter()\">YOU WON! Replay?</button>";
   },
 };
 
