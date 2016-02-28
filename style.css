@@ -3,32 +3,32 @@ body {
 }
 
 .container {
+  /*border: 1px dashed #666;*/
   display: flex;
-  border: 1px dashed #666;
 }
 
 .stage {
+  /*border: 2px solid #666;*/
   position: absolute;
   margin: auto;
   padding-left: 312px;
   padding-top: 20px;
   width: 660px;
   height: 660px;
-  border: 2px solid #666;
   background: white;
   flex-direction: column;
   justify-content: center;
 }
 
 #upperElements {
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   flex-direction: row;
   height: 250px;
   width: 660px;
 }
 
 #lowerElements {
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -42,7 +42,7 @@ body {
 }
 
 #minionBubble {
-  border: 1px solid yellow;
+  /*border: 1px solid yellow;*/
   height: 250px;
   width: 360px;
   display: inline-flex;
@@ -109,10 +109,10 @@ body {
 /*bounce animation begin*/
 
 #traveler {
+  /*border: 2px solid #666;*/
   position: absolute;
   width: 260px;
   height: 140px;
-  border: 2px solid #666;
 
   animation-name: travel;
   animation-timing-function: linear;
@@ -128,11 +128,11 @@ body {
 }
 
 #bouncer {
+  /*border: 2px solid #666;*/
   pointer-events: none;
   position: relative;
   width: 260px;
   height: 140px;
-  border: 2px solid #666;
 
   animation-name: bounce;
   animation-iteration-count: infinite;
@@ -203,8 +203,8 @@ body {
 /*begin surf*/
 
 .surf {
+  /*border: 1px dashed #666;*/
   pointer-events: none;
-  border: 1px dashed #666;
   position: absolute;
   animation-name: surfer;
   animation-duration: 4s;
